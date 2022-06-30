@@ -1,0 +1,36 @@
+<% include partials/_header %>
+
+<!-- Esta é a página principal, onde o funcionário será salvo. -->
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-5 offset-md-3 card">
+      <div class="card-body">
+          <h1>Novo Funcionário</h1>
+        <form action="/add" method="POST">
+          <div class="form-group">
+           <h2>Nome:</h2> 
+            <input type="text" name="nome" value="<%= data.nome%>" placeholder="Nome" class="form-control" pattern="[A-zÀ-ú\s]+$" required="required" title="O campo nome não pode conter números" autofocus>
+          </div>
+
+          <h2>Cargo:</h2> 
+          <div class="form-group">
+            <input type="text" name="cargo" value="<%= data.cargo%>" placeholder="Cargo" class="form-control" pattern="[A-zÀ-ú\s]+$" required="required" title="O campo Cargo não pode conter números">
+          </div>
+
+          <h2>Idade:</h2> 
+          <div class="form-group">
+            <input type="text" name="idade" value="<%= data.idade%>" placeholder="Idade" class="form-control" pattern="[0-9]+$" required="required" title="O campo Idade não pode conter letras">
+          </div>
+         
+
+          <button type="submit" class="btn btn-primary">
+            Salvar Funcionário
+          </button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<% include partials/_footer %>

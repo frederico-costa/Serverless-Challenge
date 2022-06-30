@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Funcionários</title>
+    <!-- Import do CSS e Fontes -->
+    <link rel="stylesheet" href="https://bootswatch.com/4/minty/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+  </head>
+  <body>
+    <!-- Page de Listar os Funcionários Cadastrados, com as funções de Editar e Deletar-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <a class="navbar-brand" href="/">Cadastro de Funcionários</a>
+      <a class="navbar-brand" href="/">
+        <i class="fas fa-home fa-2x " style="color:white"></i>
+      </a>
+    </nav>
+    <div class="container mt-5">
+        <div class="row">
+          <div class="col-md-7  offset-md-3">
+                <div class="card-body">
+            <table class="table table-bordered table-hover" style="width: 150%; margin-left: -28%;">
+              <thead>
+                <tr>
+                  <td>ID</td>
+                  <td>Nome</td>
+                  <td>Idade</td>
+                  <td>Cargo</td>
+                  <td>Ações</td>
+                </tr>
+              </thead>
+              <tbody>
+                  <h1>Funcionários cadastrados:</h1>
+                <% if (data) { %>
+                  <% for(var i = 0; i < data.length; i++) { %>
+                    <tr>
+                      <td><%= data[i].id %></td>
+                      <td><%= data[i].nome %></td>
+                      <td><%= data[i].idade %></td>
+                      <td><%= data[i].cargo %></td>
+                      <td>
+                        <a href="/update/<%= data[i].id %>" class="btn btn-info">Editar</a>
+                        <a href="#" class="btn btn-danger" onclick="excluir(<%= data[i].id %>);">Deletar</a>
+                      </td>
+                    </tr>
+                  <% } %>
+                <% } %>
+              </tbody>
+            </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.0.2/dist/sweetalert2.all.min.js"></script>
+      <script>
+        function excluir(id){
+          Swal.fire({
+            title: 'Deseja realmente deletar o Funcionário?',
+            icon: 'warning',              
+            showCancelButton: true,
+            confirmButtonText: `Confirmar`,                
+            }).then((result) => { 
+              if (result.isConfirmed) {
+                $.ajax({
+                  url:`/delete/${id}`,
+                  type: 'GET',
+                  success: function(resultado){
+                    if(resultado == "sucess"){
+                      Swal.fire({
+                        title: 'Funcionário deletado com sucesso!',
+                        icon: 'success',              
+                        showCancelButton: false,
+                        confirmButtonText: `OK`
+                      }).then((result) => { 
+                        if(result.isConfirmed){
+                          window.location.reload()
+                        }
+                      })                     
+                    } else {
+                      Swal.fire('FALHA!', 'Funcionário não foi deletado!', 'error');
+                    }
+                  }
+                })
+              }
+            });
+          };
+      </script>
+</body>
+</html>
