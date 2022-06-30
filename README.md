@@ -53,9 +53,9 @@ No Front utilizamos HTML5 e Bootstrap para moldar nossa interface.
 ### instalação
 
 - Com Node.Js e npm devidamente instalados, basta entrar na pasta /cadastro-funcionario (CMD: cd cadastro-funcionario) digitar "npm install".
--Renomeie o .env.exemplo para .env e certifique que a url da API esta na variável API_URL
--Para iniciar a aplicação basta digitar "npm start".
--Em seu navegador digite http://localhost:3000/.
+- Renomeie o .env.exemplo para .env e certifique que a url da API esta na variável API_URL
+- Para iniciar a aplicação basta digitar "npm start".
+- Em seu navegador digite http://localhost:3000/.
 
 ### Considerações finais
 
